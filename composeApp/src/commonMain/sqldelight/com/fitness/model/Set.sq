@@ -1,10 +1,9 @@
 CREATE TABLE `set` (
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
-        exerciseId INTEGER NOT NULL,
+        exerciseId INTEGER NOT NULL REFERENCES exercise(id),
         repsCount  INTEGER NOT NULL,
-        weight     REAL as Float NOT NULL,
-        `index`      INTEGER NOT NULL,
-        FOREIGN KEY (exerciseId) REFERENCES exercise
+        weight     REAL NOT NULL,
+        `index`      INTEGER NOT NULL
 );
 
 fetchSetsWithExercisesByExerciceId:

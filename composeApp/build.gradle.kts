@@ -48,11 +48,12 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.kodein)
         }
 
-//        iosMain.dependencies {
-//            implementation(libs.ios.sql.delight)
-//        }
+        iosMain.dependencies {
+            implementation(libs.ios.sql.delight)
+        }
     }
 }
 
@@ -91,7 +92,7 @@ sqldelight {
     databases {
         create("Database") {
             packageName.set("com.fitness")
-            srcDirs("src/commonMain/sqldelight'")
+            //srcDirs("src/commonMain/sqldelight'")
         }
     }
 }

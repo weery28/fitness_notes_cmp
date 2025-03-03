@@ -3,8 +3,8 @@ id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
 name TEXT NOT NULL,
 creationDate INTEGER NOT NULL,
 date INTEGER,
-isSynced INTEGER as Boolean NOT NULL,
-isComplete INTEGER as Boolean NOT NULL,
+isSynced INTEGER NOT NULL,
+isComplete INTEGER NOT NULL,
 serverId INTEGER
 );
 
