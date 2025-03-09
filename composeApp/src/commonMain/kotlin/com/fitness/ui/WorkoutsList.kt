@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.fitness.themes.sizes
 import com.fitness.ui.models.WorkoutsListItem
 
 @Composable
@@ -39,13 +39,16 @@ fun WorkoutDate(date: WorkoutsListItem.Date) {
     Text(
         text = date.date,
         modifier = Modifier
-            .padding(vertical = 4.dp)
+            .padding(vertical = MaterialTheme.sizes.primaryVerticalPadding / 2)
             .background(
                 color = MaterialTheme.colors.onBackground,
                 shape = RoundedCornerShape(4.dp)
             )
-            .padding(all = 4.dp),
-        fontSize = 12.sp,
+            .padding(
+                vertical = MaterialTheme.sizes.primaryVerticalMargin,
+                horizontal = MaterialTheme.sizes.primaryVerticalMargin
+            ),
+        style = MaterialTheme.typography.button,
         color = MaterialTheme.colors.onPrimary
     )
 }
@@ -55,13 +58,23 @@ fun WorkoutListItem(workout: WorkoutsListItem.Workout) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp, horizontal = 8.dp)
+            .padding(
+                vertical = MaterialTheme.sizes.betweenElementsMargin / 2,
+                horizontal = MaterialTheme.sizes.primaryHorizontalMargin
+            )
             .background(
                 color = MaterialTheme.colors.onBackground,
-                shape = RoundedCornerShape(4.dp)
+                shape = RoundedCornerShape(MaterialTheme.sizes.shapeCornerRadius)
             )
-            .padding(all = 4.dp)
+            .padding(
+                vertical = MaterialTheme.sizes.primaryVerticalMargin,
+                horizontal = MaterialTheme.sizes.primaryHorizontalMargin
+            )
     ) {
-        Text(text = workout.name, )
+        Text(
+            text = workout.name,
+            color = MaterialTheme.colors.onPrimary,
+            style = MaterialTheme.typography.button
+        )
     }
 }
