@@ -1,15 +1,19 @@
+import app.cash.sqlite.migrations.Database
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
+
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -33,6 +37,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.android.sql.delight)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -43,6 +48,11 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.kodein)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.ios.sql.delight)
         }
     }
 }
@@ -78,3 +88,11 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
+sqldelight {
+    databases {
+        create("Database") {
+            packageName.set("com.fitness")
+            //srcDirs("src/commonMain/sqldelight'")
+        }
+    }
+}

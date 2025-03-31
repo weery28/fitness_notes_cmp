@@ -1,0 +1,39 @@
+CREATE TABLE training (
+id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
+name TEXT NOT NULL,
+creationDate INTEGER NOT NULL,
+date INTEGER,
+isSynced INTEGER NOT NULL,
+isComplete INTEGER NOT NULL,
+serverId INTEGER
+);
+
+selectAll:
+SELECT *
+FROM training;
+
+findById:
+SELECT *
+FROM training
+WHERE id = ?;
+
+insert:
+INSERT INTO training(name, creationDate, date, isSynced, serverId, isComplete)
+VALUES (?, ?, ?,?,?, ?);
+
+lastInsertRowId:
+SELECT last_insert_rowid() FROM training;
+
+findLastWithExerciseExceptId:
+SELECT training.* FROM training
+JOIN exercise ON exercise.trainingId = training.id
+WHERE exercise.name = :exerciseName AND training.id != :exceptTrainingId
+ORDER BY training.date
+LIMIT 1;
+
+findLastWithExercise:
+SELECT training.* FROM training
+JOIN exercise ON exercise.trainingId = training.id
+WHERE exercise.name = :exerciseName
+ORDER BY training.date
+LIMIT 1;

@@ -1,0 +1,46 @@
+CREATE TABLE `set` (
+        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
+        exerciseId INTEGER NOT NULL REFERENCES exercise(id),
+        repsCount  INTEGER NOT NULL,
+        weight     REAL NOT NULL,
+        `index`      INTEGER NOT NULL
+);
+
+fetchSetsWithExercisesByExerciceId:
+SELECT
+    `set`.id AS setId,
+    `set`.exerciseId AS setExerciseId,
+    `set`.repsCount AS setRepsCount,
+    `set`.weight AS setWeight,
+    `set`.`index` AS setIndex,
+    exercise.id AS exerciseId,
+    exercise.name AS exerciseName,
+    exercise.weight AS exerciseWeight,
+    exercise.trainingId AS exerciseTrainingId,
+    exercise.count AS exerciseCount,
+    exercise.sets AS exerciseSets,
+    exercise.`index` AS exerciseIndex
+FROM `set`
+JOIN exercise ON exercise.id = `set`.exerciseId
+WHERE exercise.trainingId = :trainingId;
+
+fetchByExerciseId:
+SELECT * FROM `set` WHERE exerciseId = ?;
+
+insert:
+INSERT INTO `set` (exerciseId, repsCount, weight, `index`)
+VALUES (?,?,?,?);
+
+updateById:
+UPDATE `set` SET exerciseId = ?, repsCount = ?, weight = ?, `index` = ?
+WHERE id = :byId;
+
+fetchById:
+SELECT * FROM `set` WHERE id = ?;
+
+lastInsertRowId:
+SELECT last_insert_rowid() FROM `set`;
+
+delete:
+DELETE FROM `set` WHERE id = ?;
+
